@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIOS Learn — Class 10 Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:opsz,wght@9..40,400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a3d3a;--ink-2:#0e524b;--ink-soft:#13635b;
+  --marigold:#f3a00b;--marigold-soft:#fbe3b0;
+  --terra:#c1502e;--terra-soft:#f6ddd1;--terra-2:#a8431f;
+  --cream:#f7f2e7;--card:#fff;
+  --text:#15211f;--muted:#6c7d79;--line:#e8e0cf;
+  --good:#1f8a5b;--good-soft:#d8f0e3;
+  --shadow:0 18px 40px -18px rgba(10,61,58,.45);
+  --shadow-sm:0 8px 20px -12px rgba(10,61,58,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:radial-gradient(900px 500px at 15% -5%,#11514a 0%,transparent 55%),radial-gradient(800px 600px at 110% 20%,#0a3d3a 0%,transparent 50%),#062b29;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:34px 16px;color:var(--text)}
+.stage{display:flex;flex-direction:column;align-items:center;gap:18px}
+.stage-label{color:#cfe6e0;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;opacity:.8}
+.phone{width:390px;height:798px;background:#0a0a0a;border-radius:52px;padding:11px;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 2px rgba(255,255,255,.04);position:relative}
+.screen-wrap{width:100%;height:100%;background:var(--cream);border-radius:42px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.notch{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:122px;height:30px;background:#0a0a0a;border-radius:0 0 18px 18px;z-index:60}
+.statusbar{position:absolute;top:0;left:0;right:0;height:48px;z-index:55;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 7px;font-size:12.5px;font-weight:600;color:#fff;pointer-events:none;mix-blend-mode:difference}
+.statusbar .dots{display:flex;gap:5px;align-items:center}
+.statusbar .bar{width:17px;height:11px;border:1.5px solid #fff;border-radius:3px;position:relative}
+.statusbar .bar::after{content:"";position:absolute;inset:1.5px;right:5px;background:#fff;border-radius:1px}
+.viewport{flex:1;position:relative;overflow:hidden}
+.screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding-bottom:96px;opacity:0;transform:translateX(28px);pointer-events:none;transition:opacity .32s ease,transform .38s cubic-bezier(.2,.7,.2,1);-webkit-overflow-scrolling:touch}
+.screen::-webkit-scrollbar{width:0}
+.screen.active{opacity:1;transform:none;pointer-events:auto}
+.screen.active .reveal{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+.screen.active .reveal:nth-child(1){animation-delay:.04s}
+.screen.active .reveal:nth-child(2){animation-delay:.10s}
+.screen.active .reveal:nth-child(3){animation-delay:.16s}
+.screen.active .reveal:nth-child(4){animation-delay:.22s}
+.screen.active .reveal:nth-child(5){animation-delay:.28s}
+.screen.active .reveal:nth-child(6){animation-delay:.34s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.pad{padding:0 20px}
+h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;line-height:1.1}
+.icon-btn{width:40px;height:40px;border-radius:13px;border:none;background:rgba(255,255,255,.7);display:grid;place-items:center;cursor:pointer;flex:none;color:var(--ink);box-shadow:var(--shadow-sm);transition:transform .15s}
+.icon-btn:active{transform:scale(.92)}
+.topbar{display:flex;align-items:center;gap:12px;padding:58px 20px 14px}
+.topbar .ttl{font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:#fff}
+.topbar .sub{font-size:12px;color:rgba(255,255,255,.75);margin-top:1px}
+/* HOME */
+.home-head{background:linear-gradient(160deg,var(--ink) 0%,var(--ink-2) 55%,#0c4a44 100%);padding:62px 20px 30px;color:#fff;position:relative;overflow:hidden;border-radius:0 0 30px 30px}
+.home-head::before{content:"";position:absolute;right:-50px;top:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(243,160,11,.35),transparent 65%)}
+.brand-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .mark{width:48px;height:48px;border-radius:14px;flex:none;background:#fff;display:grid;place-items:center;box-shadow:0 8px 18px -6px rgba(0,0,0,.35);padding:5px}
+.logo .mark img{width:100%;height:100%;object-fit:contain;display:block}
+.logo .lt{font-family:'Bricolage Grotesque';font-weight:700;font-size:16px;line-height:1.05}
+.logo .ls{font-size:10.5px;color:rgba(255,255,255,.7)}
+.lang-toggle{display:flex;background:rgba(255,255,255,.12);border-radius:11px;padding:3px;font-size:11.5px;font-weight:600}
+.lang-toggle button{border:none;background:transparent;color:rgba(255,255,255,.7);padding:5px 9px;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;transition:.2s}
+.lang-toggle button.on{background:#fff;color:var(--ink)}
+.greet{position:relative;z-index:2;margin-top:24px}
+.greet h1{font-size:25px;font-weight:700}
+.greet p{font-size:13px;color:rgba(255,255,255,.78);margin-top:6px;max-width:80%}
+.badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px;position:relative;z-index:2}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;background:rgba(255,255,255,.13);color:#eafaf5;padding:5px 9px;border-radius:20px;border:1px solid rgba(255,255,255,.12)}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:var(--marigold)}
+.section-h{display:flex;align-items:baseline;justify-content:space-between;margin:24px 0 12px}
+.section-h h2{font-size:18px;font-weight:700}
+.section-h span{font-size:12px;color:var(--ink-soft);font-weight:600}
+.course-card{background:var(--card);border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow);cursor:pointer;border:1px solid var(--line);transition:transform .18s;display:flex;gap:15px;align-items:center}
+.course-card:active{transform:scale(.985)}
+.course-card .ci{width:60px;height:60px;border-radius:18px;flex:none;display:grid;place-items:center;font-size:28px}
+.ci.math{background:linear-gradient(150deg,#0e524b,#11645b)}
+.ci.sci{background:linear-gradient(150deg,#c1502e,#d76a44)}
+.course-card h3{font-size:17px;font-weight:700;margin-bottom:3px}
+.course-card .cdesc{font-size:12px;color:var(--muted);line-height:1.35}
+.prog{margin-top:10px;display:flex;align-items:center;gap:8px}
+.prog .track{flex:1;height:6px;background:var(--line);border-radius:6px;overflow:hidden}
+.prog .fill{height:100%;border-radius:6px}
+.fill.math{background:linear-gradient(90deg,var(--ink),var(--ink-soft));width:42%}
+.fill.sci{background:linear-gradient(90deg,var(--terra),#dd724b);width:18%}
+.prog .pct{font-size:11px;font-weight:700;color:var(--muted)}
+.chev{color:var(--muted);flex:none}
+.tip{background:linear-gradient(135deg,#fff7e6,#fdeec8);border:1px solid var(--marigold-soft);border-radius:18px;padding:15px 16px;display:flex;gap:12px;align-items:flex-start;margin-top:6px}
+.tip .ti{font-size:22px}
+.tip h4{font-size:13.5px;font-weight:700;color:#7a4d00;margin-bottom:3px}
+.tip p{font-size:11.5px;color:#92632a;line-height:1.4}
+/* CHAPTER LIST */
+.course-hero{padding:58px 20px 22px;color:#fff;border-radius:0 0 28px 28px;position:relative;overflow:hidden}
+.course-hero.math{background:linear-gradient(155deg,var(--ink),var(--ink-2))}
+.course-hero.sci{background:linear-gradient(155deg,var(--terra-2),var(--terra))}
+.course-hero::after{content:"";position:absolute;right:-30px;bottom:-50px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.08)}
+.ch-list{padding:18px 20px 0}
+.ch-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:12px;display:flex;align-items:center;gap:13px;cursor:pointer;box-shadow:var(--shadow-sm);transition:transform .16s}
+.ch-card:active{transform:scale(.985)}
+.ch-card.locked{opacity:.6}
+.ch-num{width:42px;height:42px;border-radius:13px;flex:none;display:grid;place-items:center;font-family:'Bricolage Grotesque';font-weight:700;font-size:16px;background:var(--cream);color:var(--ink);border:1px solid var(--line)}
+.ch-card.done .ch-num{background:var(--good-soft);color:var(--good);border-color:transparent}
+.ch-card.active-ch .ch-num{background:var(--ink);color:#fff;border-color:transparent}
+.ch-card.active-ch.sci-ch .ch-num{background:var(--terra)}
+.ch-card .cm{flex:1;min-width:0}
+.ch-card h4{font-size:14.5px;font-weight:700;margin-bottom:2px}
+.ch-card .cmsub{font-size:11.5px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
+.ch-card .cmsub b{color:var(--ink-soft);font-weight:600}
+.pill-status{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;flex:none}
+.ps-done{background:var(--good-soft);color:var(--good)}
+.ps-go{background:var(--marigold-soft);color:#8a5800}
+.ps-lock{background:#eee7d6;color:#998f76}
+/* HUB */
+.hub-head{padding:58px 20px 20px;color:#fff;position:relative}
+.hub-head.math{background:linear-gradient(155deg,var(--ink),var(--ink-2))}
+.hub-head.sci{background:linear-gradient(155deg,var(--terra-2),var(--terra))}
+.hub-head h1{font-size:21px;font-weight:700;margin-top:14px}
+.hub-head .hk{font-size:12px;color:rgba(255,255,255,.75);margin-top:5px}
+.hub-prog{display:flex;align-items:center;gap:10px;margin-top:16px}
+.hub-prog .track{flex:1;height:7px;background:rgba(255,255,255,.2);border-radius:6px;overflow:hidden}
+.hub-prog .fill{height:100%;width:25%;background:var(--marigold);border-radius:6px}
+.hub-prog .pct{font-size:11.5px;font-weight:700;color:#fff}
+.path{padding:22px 20px 0;position:relative}
+.path::before{content:"";position:absolute;left:43px;top:42px;bottom:30px;width:2px;background:repeating-linear-gradient(var(--line) 0 6px,transparent 6px 12px)}
+.step{display:flex;gap:14px;margin-bottom:14px;position:relative;cursor:pointer}
+.step .sdot{width:46px;height:46px;border-radius:15px;flex:none;display:grid;place-items:center;font-size:21px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-sm);z-index:2}
+.step.cur .sdot{background:var(--ink);border-color:transparent;box-shadow:0 10px 20px -8px rgba(10,61,58,.6)}
+.step.cur.sci-step .sdot{background:var(--terra)}
+.step .scard{flex:1;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 14px;box-shadow:var(--shadow-sm);transition:transform .16s}
+.step:active .scard{transform:scale(.98)}
+.step .scard .sh{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.step h4{font-size:14.5px;font-weight:700}
+.step .scard p{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.35}
+.step .tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;flex:none}
+/* RESOURCE SCREENS */
+.res-top{display:flex;align-items:center;gap:12px;padding:56px 18px 16px;color:#fff;border-radius:0 0 22px 22px}
+.res-top.math{background:linear-gradient(155deg,var(--ink),var(--ink-2))}
+.res-top.sci{background:linear-gradient(155deg,var(--terra-2),var(--terra))}
+.frame-wrap{padding:14px 14px 0}
+.frame{width:100%;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
+.video-frame{aspect-ratio:16/9;border-radius:16px;overflow:hidden}
+.video-frame iframe{width:100%;height:100%;border:0;display:block}
+.doc-frame{height:560px}
+.doc-frame iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+.res-meta{padding:14px 6px 0}
+.res-meta h1{font-size:18px;font-weight:700}
+.res-meta .vrow{display:flex;gap:8px;margin:9px 0 0;flex-wrap:wrap}
+.chiplet{font-size:11px;font-weight:600;color:var(--ink-soft);background:#e9f1ef;padding:5px 10px;border-radius:20px;border:1px solid #d8e6e2}
+.openlink{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:700;color:var(--ink-soft);text-decoration:none}
+.cta{display:block;width:calc(100% - 36px);margin:18px auto 0;border:none;cursor:pointer;background:linear-gradient(135deg,var(--marigold),#e0820a);color:#3a2400;font-family:'Bricolage Grotesque';font-weight:700;font-size:15px;padding:15px;border-radius:16px;box-shadow:0 12px 24px -10px rgba(243,160,11,.8);transition:transform .15s}
+.cta:active{transform:scale(.98)}
+.cta.dark{background:linear-gradient(135deg,var(--ink),var(--ink-soft));color:#fff;box-shadow:0 12px 24px -10px rgba(10,61,58,.7)}
+.cta.terra{background:linear-gradient(135deg,var(--terra),var(--terra-2));color:#fff;box-shadow:0 12px 24px -10px rgba(193,80,46,.7)}
+/* RESULT */
+.result{padding:70px 24px 0;text-align:center}
+.check{width:120px;height:120px;margin:0 auto;border-radius:50%;background:var(--good-soft);display:grid;place-items:center;box-shadow:0 16px 36px -14px rgba(31,138,91,.6)}
+.result h1{font-size:24px;font-weight:700;margin-top:18px;color:var(--ink)}
+.result .rsub{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.5}
+.rstats{display:flex;gap:11px;margin:22px 0}
+.rstat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 8px;box-shadow:var(--shadow-sm)}
+.rstat b{font-family:'Bricolage Grotesque';font-size:22px;display:block;color:var(--ink)}
+.rstat span{font-size:10.5px;color:var(--muted);font-weight:600}
+/* TABBAR */
+.tabbar{position:absolute;left:0;right:0;bottom:0;z-index:50;height:80px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:11px 10px 0}
+.tab{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:600;color:var(--muted);cursor:pointer;width:60px;transition:color .2s}
+.tab.on{color:var(--ink)}
+.tab .ti{width:24px;height:24px;display:grid;place-items:center}
+.footer-note{color:#9fc4bc;font-size:11px;max-width:390px;text-align:center;line-height:1.5}
+svg{display:block}
+</style>
+</head>
+<body>
+<div class="stage">
+<div class="stage-label">SIOS Learn · Student App · Class 10 · Math + Science Demo</div>
+<div class="phone"><div class="notch"></div>
+<div class="screen-wrap">
+<div class="statusbar"><span id="clock">9:41</span><div class="dots"><svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="#fff" stroke-width="1.3"><path d="M1 4.2C4.5 1 11.5 1 15 4.2M3.3 6.4c2.4-2.1 7-2.1 9.4 0M5.7 8.6c1-.9 3.6-.9 4.6 0"/></svg><div class="bar"></div></div></div>
+<div class="viewport">
+
+<!-- ======== HOME ======== -->
+<section class="screen active" id="s-home">
+<div class="home-head reveal">
+<div class="brand-row">
+<div class="logo"><div class="mark"><img src="data:image/png;base64,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" alt="SIOS"></div><div><div class="lt">SIOS Learn</div><div class="ls">STATE INSTITUTE OF OPEN SCHOOLING</div></div></div>
+<div class="lang-toggle"><button onclick="setLang('en',this)">EN</button><button class="on" onclick="setLang('od',this)">ଓଡ଼ିଆ</button></div>
+</div>
+<div class="greet">
+<h1 data-en="Namaskar, Subhasree 👋" data-od="ନମସ୍କାର, ଶୁଭଶ୍ରୀ 👋">Namaskar, Subhasree 👋</h1>
+<p data-en="Class 10 · Odia Medium. Pick up where you left off." data-od="ଦଶମ ଶ୍ରେଣୀ · ଓଡ଼ିଆ ମାଧ୍ୟମ। ଯେଉଁଠାରୁ ଛାଡ଼ିଥିଲ ସେଠାରୁ ଆରମ୍ଭ କର।">Class 10 · Odia Medium. Pick up where you left off.</p>
+
+</div>
+</div>
+<div class="pad">
+<div class="section-h reveal"><h2 data-en="Your Courses" data-od="ତୁମ ପାଠ୍ୟକ୍ରମ">Your Courses</h2><span>2 enrolled</span></div>
+<div class="course-card reveal" onclick="go('s-math-chapters')">
+<div class="ci math">📐</div>
+<div style="flex:1;min-width:0"><h3 data-en="Mathematics" data-od="ଗଣିତ">Mathematics</h3><div class="cdesc" data-en="1 chapter · ଦ୍ୱିଘାତ ସମୀକରଣ" data-od="୧ ଅଧ୍ୟାୟ · ଦ୍ୱିଘାତ ସମୀକରଣ">1 chapter · ଦ୍ୱିଘାତ ସମୀକରଣ</div><div class="prog"><div class="track"><div class="fill math"></div></div><span class="pct">42%</span></div></div>
+<div class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></div>
+</div>
+<div class="course-card reveal" onclick="go('s-sci-chapters')">
+<div class="ci sci">🔬</div>
+<div style="flex:1;min-width:0"><h3 data-en="Science" data-od="ବିଜ୍ଞାନ">Science</h3><div class="cdesc" data-en="1 chapter · ଶ୍ୱସନ" data-od="୧ ଅଧ୍ୟାୟ · ଶ୍ୱସନ">1 chapter · ଶ୍ୱସନ</div><div class="prog"><div class="track"><div class="fill sci"></div></div><span class="pct">18%</span></div></div>
+<div class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></div>
+</div>
+<div class="tip reveal"><div class="ti">🎯</div><div><h4 data-en="Daily goal: finish 1 practice set" data-od="ଦୈନିକ ଲକ୍ଷ୍ୟ: ୧ଟି ଅଭ୍ୟାସ ସେଟ୍ ଶେଷ କର">Daily goal: finish 1 practice set</h4><p data-en="You're on a 4-day streak. Watch → Practice → Test to master each chapter." data-od="ତୁମେ ୪ ଦିନର ଧାରାରେ ଅଛ। ପ୍ରତ୍ୟେକ ଅଧ୍ୟାୟ ଆୟତ୍ତ କରିବାକୁ ଦେଖ → ଅଭ୍ୟାସ → ପରୀକ୍ଷା।">You're on a 4-day streak. Watch → Practice → Test to master each chapter.</p></div></div>
+</div>
+</section>
+
+<!-- ======== MATH CHAPTERS ======== -->
+<section class="screen" id="s-math-chapters">
+<div class="course-hero math reveal">
+<div style="display:flex;align-items:center;gap:12px;position:relative;z-index:2"><button class="icon-btn" onclick="go('s-home','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="topbar-ttl" style="font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:#fff">Mathematics</div><div style="font-size:12px;color:rgba(255,255,255,.75)">Class 10 · Odia Medium</div></div></div>
+<div style="display:flex;gap:18px;margin-top:18px;position:relative;z-index:2"><div><div style="font-family:'Bricolage Grotesque';font-size:22px;font-weight:700">1</div><div style="font-size:11px;color:rgba(255,255,255,.7)">Chapter</div></div><div><div style="font-family:'Bricolage Grotesque';font-size:22px;font-weight:700">1</div><div style="font-size:11px;color:rgba(255,255,255,.7)">Video</div></div><div><div style="font-family:'Bricolage Grotesque';font-size:22px;font-weight:700">4</div><div style="font-size:11px;color:rgba(255,255,255,.7)">Resources</div></div></div>
+</div>
+<div class="ch-list">
+<div class="ch-card active-ch reveal" onclick="go('s-math-hub')"><div class="ch-num">1</div><div class="cm"><h4 data-en="Quadratic Equations" data-od="ଦ୍ୱିଘାତ ସମୀକରଣ">Quadratic Equations</h4><div class="cmsub"><b>Video</b><span>· Practice · PYQ · Test</span></div></div><span class="pill-status ps-go">Continue</span></div>
+</div>
+</section>
+
+<!-- ======== MATH HUB ======== -->
+<section class="screen" id="s-math-hub">
+<div class="hub-head math reveal">
+<div style="display:flex;align-items:center;gap:12px"><button class="icon-btn" onclick="go('s-math-chapters','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div style="font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:#fff">Chapter 1</div><div style="font-size:12px;color:rgba(255,255,255,.75)">Mathematics</div></div></div>
+<h1 data-en="Quadratic Equations" data-od="ଦ୍ୱିଘାତ ସମୀକରଣ">Quadratic Equations</h1>
+<div class="hk" data-en="Lesson: Solving by completing the square" data-od="ପାଠ: ପୂର୍ଣ୍ଣବର୍ଗରେ ପରିଣତ କରି ସମାଧାନ">Lesson: Solving by completing the square</div>
+<div class="hub-prog"><div class="track"><div class="fill"></div></div><span class="pct">1 / 4</span></div>
+</div>
+<div class="path">
+<div class="step cur reveal" onclick="go('s-math-video')"><div class="sdot">🎬</div><div class="scard"><div class="sh"><h4>Concept Video</h4><span class="tag ps-go">Watch</span></div><p>Step by step in Odia — completing the square method.</p></div></div>
+<div class="step reveal" onclick="go('s-math-practice')"><div class="sdot">✍️</div><div class="scard"><div class="sh"><h4>Practice Questions</h4><span class="tag ps-go">Interactive</span></div><p>Interactive MCQs with instant feedback.</p></div></div>
+<div class="step reveal" onclick="go('s-math-pyq')"><div class="sdot">📝</div><div class="scard"><div class="sh"><h4>Previous Year &amp; Long Answers</h4><span class="tag ps-go">PDF</span></div><p>Board-style questions with model solutions.</p></div></div>
+<div class="step reveal" onclick="go('s-math-test')"><div class="sdot">🏆</div><div class="scard"><div class="sh"><h4>Unit Test</h4><span class="tag ps-go">Take test</span></div><p>Chapter-end assessment. Unlocks the next chapter.</p></div></div>
+</div>
+</section>
+
+<!-- ======== MATH VIDEO ======== -->
+<section class="screen" id="s-math-video">
+<div class="res-top math reveal"><button class="icon-btn" onclick="go('s-math-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Concept Video</div><div class="sub">Quadratic Equations · Step 1 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame video-frame"><iframe src="https://www.youtube.com/embed/3wU0P-dH5-I?rel=0&modestbranding=1" title="Math concept video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+<div class="res-meta"><h1 data-en="Solving by completing the square" data-od="ପୂର୍ଣ୍ଣବର୍ଗରେ ପରିଣତ କରି ସମାଧାନ">Solving by completing the square</h1><div class="vrow"><span class="chiplet">Odia narration</span><span class="chiplet">SIOS Original</span></div><a class="openlink" href="https://www.youtube.com/watch?v=69R6LO4pnfc" target="_blank" rel="noopener">Open on YouTube ↗</a></div></div>
+<button class="cta reveal" onclick="go('s-math-practice')">Watched it → Practice now</button>
+</section>
+
+<!-- ======== MATH PRACTICE ======== -->
+<section class="screen" id="s-math-practice">
+<div class="res-top math reveal"><button class="icon-btn" onclick="go('s-math-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Practice Questions</div><div class="sub">Quadratic Equations · Step 2 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame doc-frame"><iframe src="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/253/files/4547/4547_aN3GyYcpA3.html" title="Math practice"></iframe></div>
+<div class="res-meta"><a class="openlink" href="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/253/files/4547/4547_aN3GyYcpA3.html" target="_blank" rel="noopener">Open practice full screen ↗</a></div></div>
+<button class="cta reveal" onclick="go('s-math-pyq')">Next → Previous Year Qs</button>
+</section>
+
+<!-- ======== MATH PYQ ======== -->
+<section class="screen" id="s-math-pyq">
+<div class="res-top math reveal"><button class="icon-btn" onclick="go('s-math-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Previous Year &amp; Long Answers</div><div class="sub">Quadratic Equations · Step 3 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame doc-frame"><iframe src="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/253/files/11659/11659_yk0pYqd1kA.pdf#toolbar=0&view=Fit" title="Math PYQ PDF"></iframe></div>
+<div class="res-meta"><a class="openlink" href="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/253/files/11659/11659_yk0pYqd1kA.pdf" target="_blank" rel="noopener">Open PDF full screen ↗</a></div></div>
+<button class="cta dark reveal" onclick="go('s-math-test')">Ready → Take the Unit Test</button>
+</section>
+
+<!-- ======== MATH TEST ======== -->
+<section class="screen" id="s-math-test">
+<div class="res-top math reveal"><button class="icon-btn" onclick="go('s-math-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Unit Test</div><div class="sub">Quadratic Equations · Step 4 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame doc-frame"><iframe src="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/253/files/5168/5168_IaSX90GeJv.html" title="Math unit test"></iframe></div>
+<div class="res-meta"><a class="openlink" href="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/253/files/5168/5168_IaSX90GeJv.html" target="_blank" rel="noopener">Open test full screen ↗</a></div></div>
+<button class="cta dark reveal" onclick="go('s-result')">Submit test</button>
+</section>
+
+<!-- ======== SCIENCE CHAPTERS ======== -->
+<section class="screen" id="s-sci-chapters">
+<div class="course-hero sci reveal">
+<div style="display:flex;align-items:center;gap:12px;position:relative;z-index:2"><button class="icon-btn" onclick="go('s-home','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div style="font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:#fff">Science</div><div style="font-size:12px;color:rgba(255,255,255,.75)">Class 10 · Odia Medium</div></div></div>
+<div style="display:flex;gap:18px;margin-top:18px;position:relative;z-index:2"><div><div style="font-family:'Bricolage Grotesque';font-size:22px;font-weight:700">1</div><div style="font-size:11px;color:rgba(255,255,255,.7)">Chapter</div></div><div><div style="font-family:'Bricolage Grotesque';font-size:22px;font-weight:700">1</div><div style="font-size:11px;color:rgba(255,255,255,.7)">Video</div></div><div><div style="font-family:'Bricolage Grotesque';font-size:22px;font-weight:700">4</div><div style="font-size:11px;color:rgba(255,255,255,.7)">Resources</div></div></div>
+</div>
+<div class="ch-list">
+<div class="ch-card active-ch sci-ch reveal" onclick="go('s-sci-hub')"><div class="ch-num">1</div><div class="cm"><h4 data-en="Respiration" data-od="ଶ୍ୱସନ">Respiration</h4><div class="cmsub"><b>Video</b><span>· Practice · PYQ · Test</span></div></div><span class="pill-status ps-go">Continue</span></div>
+</div>
+</section>
+
+<!-- ======== SCIENCE HUB ======== -->
+<section class="screen" id="s-sci-hub">
+<div class="hub-head sci reveal">
+<div style="display:flex;align-items:center;gap:12px"><button class="icon-btn" onclick="go('s-sci-chapters','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div style="font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:#fff">Chapter 1</div><div style="font-size:12px;color:rgba(255,255,255,.75)">Science</div></div></div>
+<h1 data-en="Respiration" data-od="ଶ୍ୱସନ">Respiration</h1>
+<div class="hk" data-en="Follow the path: Watch → Practice → Solve → Test" data-od="ଦେଖ → ଅଭ୍ୟାସ → ସମାଧାନ → ପରୀକ୍ଷା">Follow the path: Watch → Practice → Solve → Test</div>
+<div class="hub-prog"><div class="track"><div class="fill"></div></div><span class="pct">1 / 4</span></div>
+</div>
+<div class="path">
+<div class="step cur sci-step reveal" onclick="go('s-sci-video')"><div class="sdot">🎬</div><div class="scard"><div class="sh"><h4>Concept Video</h4><span class="tag ps-go">Watch</span></div><p>Full concept explained step by step in Odia.</p></div></div>
+<div class="step reveal" onclick="go('s-sci-practice')"><div class="sdot">✍️</div><div class="scard"><div class="sh"><h4>Practice Questions</h4><span class="tag ps-go">Interactive</span></div><p>Interactive MCQs with instant feedback.</p></div></div>
+<div class="step reveal" onclick="go('s-sci-pyq')"><div class="sdot">📝</div><div class="scard"><div class="sh"><h4>Previous Year &amp; Long Answers</h4><span class="tag ps-go">PDF</span></div><p>Board-style questions with model solutions.</p></div></div>
+<div class="step reveal" onclick="go('s-sci-test')"><div class="sdot">🏆</div><div class="scard"><div class="sh"><h4>Unit Test</h4><span class="tag ps-go">Take test</span></div><p>Chapter-end assessment. Unlocks the next chapter.</p></div></div>
+</div>
+</section>
+
+<!-- ======== SCIENCE VIDEO ======== -->
+<section class="screen" id="s-sci-video">
+<div class="res-top sci reveal"><button class="icon-btn" onclick="go('s-sci-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Concept Video</div><div class="sub">Science · Step 1 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame video-frame"><iframe src="https://www.youtube.com/embed/MtBtORkcG4s?rel=0&modestbranding=1" title="Science concept video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+<div class="res-meta"><h1 data-en="Respiration" data-od="ଶ୍ୱସନ">Respiration</h1><div class="vrow"><span class="chiplet">Odia narration</span><span class="chiplet">SIOS Original</span></div><a class="openlink" href="https://www.youtube.com/watch?v=Yek5mP7wqMc" target="_blank" rel="noopener">Open on YouTube ↗</a></div></div>
+<button class="cta terra reveal" onclick="go('s-sci-practice')">Watched it → Practice now</button>
+</section>
+
+<!-- ======== SCIENCE PRACTICE ======== -->
+<section class="screen" id="s-sci-practice">
+<div class="res-top sci reveal"><button class="icon-btn" onclick="go('s-sci-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Practice Questions</div><div class="sub">Science · Step 2 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame doc-frame"><iframe src="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/132/files/4489/4489_EDeDrIIeJj.html" title="Science practice"></iframe></div>
+<div class="res-meta"><a class="openlink" href="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/132/files/4489/4489_EDeDrIIeJj.html" target="_blank" rel="noopener">Open practice full screen ↗</a></div></div>
+<button class="cta terra reveal" onclick="go('s-sci-pyq')">Next → Previous Year Qs</button>
+</section>
+
+<!-- ======== SCIENCE PYQ ======== -->
+<section class="screen" id="s-sci-pyq">
+<div class="res-top sci reveal"><button class="icon-btn" onclick="go('s-sci-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Previous Year &amp; Long Answers</div><div class="sub">Science · Step 3 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame doc-frame"><iframe src="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/132/files/3793/3793_npg2Q6Tjon.pdf#toolbar=0&view=Fit" title="Science PYQ PDF"></iframe></div>
+<div class="res-meta"><a class="openlink" href="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/132/files/3793/3793_npg2Q6Tjon.pdf" target="_blank" rel="noopener">Open PDF full screen ↗</a></div></div>
+<button class="cta terra reveal" onclick="go('s-sci-test')">Ready → Take the Unit Test</button>
+</section>
+
+<!-- ======== SCIENCE TEST ======== -->
+<section class="screen" id="s-sci-test">
+<div class="res-top sci reveal"><button class="icon-btn" onclick="go('s-sci-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Unit Test</div><div class="sub">Science · Step 4 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame doc-frame"><iframe src="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/132/files/4897/4897_zq8FOZ7miB.html" title="Science unit test"></iframe></div>
+<div class="res-meta"><a class="openlink" href="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/132/files/4897/4897_zq8FOZ7miB.html" target="_blank" rel="noopener">Open test full screen ↗</a></div></div>
+<button class="cta terra reveal" onclick="go('s-result')">Submit test</button>
+</section>
+
+<!-- ======== RESULT (shared) ======== -->
+<section class="screen" id="s-result">
+<div class="result">
+<div class="check reveal"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></div>
+<h1 class="reveal">Chapter Complete! 🎉</h1>
+<p class="rsub reveal">You've finished this chapter. The next chapter is now unlocked.</p>
+<div class="rstats reveal"><div class="rstat"><b>✓</b><span>Test submitted</span></div><div class="rstat"><b>+50</b><span>XP earned</span></div><div class="rstat"><b>5🔥</b><span>Day streak</span></div></div>
+<button class="cta dark reveal" onclick="go('s-home')">Back to home</button>
+</div>
+</section>
+
+</div><!-- /viewport -->
+<div class="tabbar">
+<div class="tab on" onclick="go('s-home')"><div class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></div><span>Home</span></div>
+<div class="tab" onclick="go('s-math-chapters')"><div class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg></div><span>Learn</span></div>
+<div class="tab" onclick="go('s-sci-chapters')"><div class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 7-7M4 12a8 8 0 1016 0 8 8 0 00-16 0"/></svg></div><span>Tests</span></div>
+<div class="tab" onclick="go('s-home')"><div class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><span>Profile</span></div>
+</div>
+</div></div>
+<div class="footer-note">Both courses live · Mathematics → Quadratic Equations · Science → Metals & Non-metals · Upload to your AWS server for full inline embeds including YouTube.</div>
+</div>
+
+<script>
+function loadFrames(id){document.querySelectorAll('#'+id+' iframe[data-src]').forEach(f=>{if(!f.src)f.src=f.getAttribute('data-src');})}
+function go(id,dir){
+  var cur=document.querySelector('.screen.active'),next=document.getElementById(id);
+  if(cur===next)return;
+  if(cur)cur.classList.remove('active');
+  next.scrollTop=0;next.classList.add('active');
+  loadFrames(id);
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  var m={'s-home':0,'s-math-chapters':1,'s-math-hub':1,'s-math-video':1,'s-math-practice':1,'s-math-pyq':1,'s-math-test':1,'s-sci-chapters':2,'s-sci-hub':2,'s-sci-video':2,'s-sci-practice':2,'s-sci-pyq':2,'s-sci-test':2,'s-result':0};
+  var tabs=document.querySelectorAll('.tab');if(m[id]!=null)tabs[m[id]].classList.add('on');
+}
+function setLang(l,btn){
+  document.querySelectorAll('.lang-toggle button').forEach(function(b){b.classList.remove('on')});
+  btn.classList.add('on');
+  document.querySelectorAll('[data-en]').forEach(function(el){el.innerHTML=(l==='od')?el.getAttribute('data-od'):el.getAttribute('data-en');});
+}
+function tick(){var d=new Date(),h=d.getHours(),m=d.getMinutes();document.getElementById('clock').textContent=(h%12||12)+':'+String(m).padStart(2,'0');}
+tick();setInterval(tick,30000);
+// Apply Odia as default on load
+document.querySelectorAll('[data-en]').forEach(function(el){if(el.getAttribute('data-od'))el.innerHTML=el.getAttribute('data-od');});
+</script>
+</body>
+</html>
