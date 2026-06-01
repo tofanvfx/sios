@@ -174,9 +174,11 @@ svg{display:block}
   .screen-wrap{border-radius:0;background:#f7f2e7}
   .notch{display:none}
   .statusbar{display:none}
-  .viewport{flex:1;position:relative}
-  .screen{padding-bottom:96px;position:absolute;inset:0;opacity:0;transform:translateX(28px);pointer-events:none}
+  .viewport{flex:1;position:relative;overflow:hidden}
+  .screen{padding-bottom:96px;position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;opacity:0;transform:translateX(28px);pointer-events:none}
   .screen.active{opacity:1;transform:none;pointer-events:auto}
+  .frame-wrap{padding:14px 14px 0}
+  .doc-frame{height:calc(100vh - 300px);min-height:300px}
   .footer-note{display:none}
 }
 </style>
