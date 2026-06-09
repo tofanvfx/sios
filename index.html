@@ -74,6 +74,7 @@ h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;l
 .course-card .ci{width:60px;height:60px;border-radius:18px;flex:none;display:grid;place-items:center;font-size:28px}
 .ci.math{background:linear-gradient(150deg,#0e524b,#11645b)}
 .ci.sci{background:linear-gradient(150deg,#c1502e,#d76a44)}
+.ci.hist{background:linear-gradient(150deg,#2d5f4f,#4a8f6f)}
 .course-card h3{font-size:17px;font-weight:700;margin-bottom:3px}
 .course-card .cdesc{font-size:12px;color:var(--muted);line-height:1.35}
 .prog{margin-top:10px;display:flex;align-items:center;gap:8px}
@@ -81,6 +82,7 @@ h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;l
 .prog .fill{height:100%;border-radius:6px}
 .fill.math{background:linear-gradient(90deg,var(--ink),var(--ink-soft));width:42%}
 .fill.sci{background:linear-gradient(90deg,var(--terra),#dd724b);width:18%}
+.fill.hist{background:linear-gradient(90deg,#2d5f4f,#4a8f6f);width:25%}
 .prog .pct{font-size:11px;font-weight:700;color:var(--muted)}
 .chev{color:var(--muted);flex:none}
 .tip{background:linear-gradient(135deg,#fff7e6,#fdeec8);border:1px solid var(--marigold-soft);border-radius:18px;padding:15px 16px;display:flex;gap:12px;align-items:flex-start;margin-top:6px}
@@ -91,6 +93,7 @@ h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;l
 .course-hero{padding:58px 20px 22px;color:#fff;border-radius:0 0 28px 28px;position:relative;overflow:hidden}
 .course-hero.math{background:linear-gradient(155deg,var(--ink),var(--ink-2))}
 .course-hero.sci{background:linear-gradient(155deg,var(--terra-2),var(--terra))}
+.course-hero.hist{background:linear-gradient(155deg,#2d5f4f,#4a8f6f)}
 .course-hero::after{content:"";position:absolute;right:-30px;bottom:-50px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.08)}
 .ch-list{padding:18px 20px 0}
 .ch-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:12px;display:flex;align-items:center;gap:13px;cursor:pointer;box-shadow:var(--shadow-sm);transition:transform .16s}
@@ -100,6 +103,7 @@ h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;l
 .ch-card.done .ch-num{background:var(--good-soft);color:var(--good);border-color:transparent}
 .ch-card.active-ch .ch-num{background:var(--ink);color:#fff;border-color:transparent}
 .ch-card.active-ch.sci-ch .ch-num{background:var(--terra)}
+.ch-card.active-ch.hist-ch .ch-num{background:#2d5f4f}
 .ch-card .cm{flex:1;min-width:0}
 .ch-card h4{font-size:14.5px;font-weight:700;margin-bottom:2px}
 .ch-card .cmsub{font-size:11.5px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
@@ -112,6 +116,7 @@ h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;l
 .hub-head{padding:58px 20px 20px;color:#fff;position:relative}
 .hub-head.math{background:linear-gradient(155deg,var(--ink),var(--ink-2))}
 .hub-head.sci{background:linear-gradient(155deg,var(--terra-2),var(--terra))}
+.hub-head.hist{background:linear-gradient(155deg,#2d5f4f,#4a8f6f)}
 .hub-head h1{font-size:21px;font-weight:700;margin-top:14px}
 .hub-head .hk{font-size:12px;color:rgba(255,255,255,.75);margin-top:5px}
 .hub-prog{display:flex;align-items:center;gap:10px;margin-top:16px}
@@ -124,6 +129,7 @@ h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;l
 .step .sdot{width:46px;height:46px;border-radius:15px;flex:none;display:grid;place-items:center;font-size:21px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-sm);z-index:2}
 .step.cur .sdot{background:var(--ink);border-color:transparent;box-shadow:0 10px 20px -8px rgba(10,61,58,.6)}
 .step.cur.sci-step .sdot{background:var(--terra)}
+.step.cur.hist-step .sdot{background:#2d5f4f}
 .step .scard{flex:1;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 14px;box-shadow:var(--shadow-sm);transition:transform .16s}
 .step:active .scard{transform:scale(.98)}
 .step .scard .sh{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -134,6 +140,7 @@ h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;l
 .res-top{display:flex;align-items:center;gap:12px;padding:56px 18px 16px;color:#fff;border-radius:0 0 22px 22px}
 .res-top.math{background:linear-gradient(155deg,var(--ink),var(--ink-2))}
 .res-top.sci{background:linear-gradient(155deg,var(--terra-2),var(--terra))}
+.res-top.hist{background:linear-gradient(155deg,#2d5f4f,#4a8f6f)}
 .frame-wrap{padding:14px 14px 0}
 .frame{width:100%;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
 .video-frame{aspect-ratio:16/9;border-radius:16px;overflow:hidden}
@@ -149,6 +156,7 @@ h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;l
 .cta:active{transform:scale(.98)}
 .cta.dark{background:linear-gradient(135deg,var(--ink),var(--ink-soft));color:#fff;box-shadow:0 12px 24px -10px rgba(10,61,58,.7)}
 .cta.terra{background:linear-gradient(135deg,var(--terra),var(--terra-2));color:#fff;box-shadow:0 12px 24px -10px rgba(193,80,46,.7)}
+.cta.hist{background:linear-gradient(135deg,#2d5f4f,#4a8f6f);color:#fff;box-shadow:0 12px 24px -10px rgba(45,95,79,.7)}
 /* RESULT */
 .result{padding:70px 24px 0;text-align:center}
 .check{width:120px;height:120px;margin:0 auto;border-radius:50%;background:var(--good-soft);display:grid;place-items:center;box-shadow:0 16px 36px -14px rgba(31,138,91,.6)}
@@ -205,7 +213,7 @@ svg{display:block}
 </div>
 </div>
 <div class="pad">
-<div class="section-h reveal"><h2 data-en="Your Courses" data-od="ତୁମ ପାଠ୍ୟକ୍ରମ">Your Courses</h2><span>2 enrolled</span></div>
+<div class="section-h reveal"><h2 data-en="Your Courses" data-od="ତୁମ ପାଠ୍ୟକ୍ରମ">Your Courses</h2><span>3 enrolled</span></div>
 <div class="course-card reveal" onclick="go('s-math-chapters')">
 <div class="ci math">📐</div>
 <div style="flex:1;min-width:0"><h3 data-en="Mathematics" data-od="ଗଣିତ">Mathematics</h3><div class="cdesc" data-en="1 chapter · ଦ୍ୱିଘାତ ସମୀକରଣ" data-od="୧ ଅଧ୍ୟାୟ · ଦ୍ୱିଘାତ ସମୀକରଣ">1 chapter · ଦ୍ୱିଘାତ ସମୀକରଣ</div><div class="prog"><div class="track"><div class="fill math"></div></div><span class="pct">42%</span></div></div>
@@ -214,6 +222,11 @@ svg{display:block}
 <div class="course-card reveal" onclick="go('s-sci-chapters')">
 <div class="ci sci">🔬</div>
 <div style="flex:1;min-width:0"><h3 data-en="Science" data-od="ବିଜ୍ଞାନ">Science</h3><div class="cdesc" data-en="1 chapter · ଶ୍ୱସନ" data-od="୧ ଅଧ୍ୟାୟ · ଶ୍ୱସନ">1 chapter · ଶ୍ୱସନ</div><div class="prog"><div class="track"><div class="fill sci"></div></div><span class="pct">18%</span></div></div>
+<div class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></div>
+</div>
+<div class="course-card reveal" onclick="go('s-hist-chapters')">
+<div class="ci hist">📚</div>
+<div style="flex:1;min-width:0"><h3 data-en="History" data-od="ଇତିହାସ">History</h3><div class="cdesc" data-en="1 chapter · ଦକ୍ଷିଣ ଆଫ୍ରିକାରେ ଗାନ୍ଧିଜୀ" data-od="୧ ଅଧ୍ୟାୟ · ଦକ୍ଷିଣ ଆଫ୍ରିକାରେ ଗାନ୍ଧିଜୀ">1 chapter · ଦକ୍ଷିଣ ଆଫ୍ରିକାରେ ଗାନ୍ଧିଜୀ</div><div class="prog"><div class="track"><div class="fill hist"></div></div><span class="pct">25%</span></div></div>
 <div class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></div>
 </div>
 <div class="tip reveal"><div class="ti">🎯</div><div><h4 data-en="Daily goal: finish 1 practice set" data-od="ଦୈନିକ ଲକ୍ଷ୍ୟ: ୧ଟି ଅଭ୍ୟାସ ସେଟ୍ ଶେଷ କର">Daily goal: finish 1 practice set</h4><p data-en="You're on a 4-day streak. Watch → Practice → Test to master each chapter." data-od="ତୁମେ ୪ ଦିନର ଧାରାରେ ଅଛ। ପ୍ରତ୍ୟେକ ଅଧ୍ୟାୟ ଆୟତ୍ତ କରିବାକୁ ଦେଖ → ଅଭ୍ୟାସ → ପରୀକ୍ଷା।">You're on a 4-day streak. Watch → Practice → Test to master each chapter.</p></div></div>
@@ -250,7 +263,7 @@ svg{display:block}
 <!-- ======== MATH VIDEO ======== -->
 <section class="screen" id="s-math-video">
 <div class="res-top math reveal"><button class="icon-btn" onclick="go('s-math-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Concept Video</div><div class="sub">Quadratic Equations · Step 1 of 4</div></div></div>
-<div class="frame-wrap reveal"><div class="frame video-frame"><iframe src="https://www.youtube.com/embed/3wU0P-dH5-I?rel=0&modestbranding=1" title="Math concept video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+<div class="frame-wrap reveal"><div class="frame video-frame"><iframe class="yt-embed" src="https://www.youtube.com/embed/3wU0P-dH5-I?rel=0&modestbranding=1" title="Math concept video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 <div class="res-meta"><h1 data-en="Solving by completing the square" data-od="ପୂର୍ଣ୍ଣବର୍ଗରେ ପରିଣତ କରି ସମାଧାନ">Solving by completing the square</h1><div class="vrow"><span class="chiplet">Odia narration</span><span class="chiplet">SIOS Original</span></div><a class="openlink" href="https://www.youtube.com/watch?v=69R6LO4pnfc" target="_blank" rel="noopener">Open on YouTube ↗</a></div></div>
 <button class="cta reveal" onclick="go('s-math-practice')">Watched it → Practice now</button>
 </section>
@@ -290,6 +303,65 @@ svg{display:block}
 </div>
 </section>
 
+<!-- ======== HISTORY CHAPTERS ======== -->
+<section class="screen" id="s-hist-chapters">
+<div class="course-hero hist reveal">
+<div style="display:flex;align-items:center;gap:12px;position:relative;z-index:2"><button class="icon-btn" onclick="go('s-home','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div style="font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:#fff">History</div><div style="font-size:12px;color:rgba(255,255,255,.75)">Class 10 · Odia Medium</div></div></div>
+<div style="display:flex;gap:18px;margin-top:18px;position:relative;z-index:2"><div><div style="font-family:'Bricolage Grotesque';font-size:22px;font-weight:700">1</div><div style="font-size:11px;color:rgba(255,255,255,.7)">Chapter</div></div><div><div style="font-family:'Bricolage Grotesque';font-size:22px;font-weight:700">1</div><div style="font-size:11px;color:rgba(255,255,255,.7)">Video</div></div><div><div style="font-family:'Bricolage Grotesque';font-size:22px;font-weight:700">4</div><div style="font-size:11px;color:rgba(255,255,255,.7)">Resources</div></div></div>
+</div>
+<div class="ch-list">
+<div class="ch-card active-ch hist-ch reveal" onclick="go('s-hist-hub')"><div class="ch-num">1</div><div class="cm"><h4 data-en="Gandhi in South Africa" data-od="ଦକ୍ଷିଣ ଆଫ୍ରିକାରେ ଗାନ୍ଧିଜୀ">Gandhi in South Africa</h4><div class="cmsub"><b>Video</b><span>· Practice · PYQ · Test</span></div></div><span class="pill-status ps-go">Continue</span></div>
+</div>
+</section>
+
+<!-- ======== HISTORY HUB ======== -->
+<section class="screen" id="s-hist-hub">
+<div class="hub-head hist reveal">
+<div style="display:flex;align-items:center;gap:12px"><button class="icon-btn" onclick="go('s-hist-chapters','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div style="font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:#fff">Chapter 1</div><div style="font-size:12px;color:rgba(255,255,255,.75)">History</div></div></div>
+<h1 data-en="Gandhi in South Africa" data-od="ଦକ୍ଷିଣ ଆଫ୍ରିକାରେ ଗାନ୍ଧିଜୀ">Gandhi in South Africa</h1>
+<div class="hk" data-en="Learn about Gandhi's struggles against apartheid and racial discrimination" data-od="ଭେଦଭାବ ଓ ବର୍ଣ୍ଣନିରସେଚନ ବିରୁଦ୍ଧରେ ଗାନ୍ଧିଜୀଙ୍କ ସଂଘର୍ଷ ଶିଖ">Learn about Gandhi's struggles against apartheid and racial discrimination</div>
+<div class="hub-prog"><div class="track"><div class="fill"></div></div><span class="pct">1 / 4</span></div>
+</div>
+<div class="path">
+<div class="step cur hist-step reveal" onclick="go('s-hist-video')"><div class="sdot">🎬</div><div class="scard"><div class="sh"><h4>Concept Video</h4><span class="tag ps-go">Watch</span></div><p>Comprehensive overview in Odia — Gandhi's time in South Africa.</p></div></div>
+<div class="step reveal" onclick="go('s-hist-practice')"><div class="sdot">✍️</div><div class="scard"><div class="sh"><h4>Practice Questions</h4><span class="tag ps-go">Interactive</span></div><p>Interactive MCQs with instant feedback.</p></div></div>
+<div class="step reveal" onclick="go('s-hist-pyq')"><div class="sdot">📝</div><div class="scard"><div class="sh"><h4>Previous Year &amp; Long Answers</h4><span class="tag ps-go">PDF</span></div><p>Board-style questions with model solutions.</p></div></div>
+<div class="step reveal" onclick="go('s-hist-test')"><div class="sdot">🏆</div><div class="scard"><div class="sh"><h4>Unit Test</h4><span class="tag ps-go">Take test</span></div><p>Chapter-end assessment. Unlocks the next chapter.</p></div></div>
+</div>
+</section>
+
+<!-- ======== HISTORY VIDEO ======== -->
+<section class="screen" id="s-hist-video">
+<div class="res-top hist reveal"><button class="icon-btn" onclick="go('s-hist-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Concept Video</div><div class="sub">History · Step 1 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame video-frame"><iframe class="yt-embed" src="https://www.youtube.com/embed/JQQzbNTfn1A?rel=0&modestbranding=1" title="History concept video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<div class="res-meta"><h1 data-en="Gandhi in South Africa" data-od="ଦକ୍ଷିଣ ଆଫ୍ରିକାରେ ଗାନ୍ଧିଜୀ">Gandhi in South Africa</h1><div class="vrow"><span class="chiplet">Odia narration</span><span class="chiplet">SIOS Original</span></div><a class="openlink" href="https://youtu.be/JQQzbNTfn1A" target="_blank" rel="noopener">Open on YouTube ↗</a></div></div>
+<button class="cta hist reveal" onclick="go('s-hist-practice')">Watched it → Practice now</button>
+</section>
+
+<!-- ======== HISTORY PRACTICE ======== -->
+<section class="screen" id="s-hist-practice">
+<div class="res-top hist reveal"><button class="icon-btn" onclick="go('s-hist-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Practice Questions</div><div class="sub">History · Step 2 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame doc-frame"><iframe src="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/155/files/4335/4335_tvAofE6Cfk.html" title="History practice"></iframe></div>
+<div class="res-meta"><a class="openlink" href="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/155/files/4335/4335_tvAofE6Cfk.html" target="_blank" rel="noopener">Open practice full screen ↗</a></div></div>
+<button class="cta hist reveal" onclick="go('s-hist-pyq')">Next → Previous Year Qs</button>
+</section>
+
+<!-- ======== HISTORY PYQ ======== -->
+<section class="screen" id="s-hist-pyq">
+<div class="res-top hist reveal"><button class="icon-btn" onclick="go('s-hist-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Previous Year &amp; Long Answers</div><div class="sub">History · Step 3 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame doc-frame"><iframe src="https://1drv.ms/b/c/8C59623E8E83A613/IQQboC9RhrOZRrerpCpo8IX3AfuE-BAo_5dAbFLD1f42WpU" title="History PYQ PDF" style="width:100%;height:100%" frameborder="0"></iframe></div>
+<div class="res-meta"><a class="openlink" href="https://1drv.ms/b/c/8C59623E8E83A613/IQQboC9RhrOZRrerpCpo8IX3AfuE-BAo_5dAbFLD1f42WpU" target="_blank" rel="noopener">Open PDF full screen ↗</a></div></div>
+<button class="cta hist reveal" onclick="go('s-hist-test')">Ready → Take the Unit Test</button>
+</section>
+
+<!-- ======== HISTORY TEST ======== -->
+<section class="screen" id="s-hist-test">
+<div class="res-top hist reveal"><button class="icon-btn" onclick="go('s-hist-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Unit Test</div><div class="sub">History · Step 4 of 4</div></div></div>
+<div class="frame-wrap reveal"><div class="frame doc-frame"><iframe src="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/155/files/5158/5158_g1Hhpf3QxL.html" title="History unit test"></iframe></div>
+<div class="res-meta"><a class="openlink" href="https://shikhyaprod.s3.amazonaws.com/odia/CourseResource/155/files/5158/5158_g1Hhpf3QxL.html" target="_blank" rel="noopener">Open test full screen ↗</a></div></div>
+<button class="cta hist reveal" onclick="go('s-result')">Submit test</button>
+</section>
+
 <!-- ======== SCIENCE HUB ======== -->
 <section class="screen" id="s-sci-hub">
 <div class="hub-head sci reveal">
@@ -309,7 +381,7 @@ svg{display:block}
 <!-- ======== SCIENCE VIDEO ======== -->
 <section class="screen" id="s-sci-video">
 <div class="res-top sci reveal"><button class="icon-btn" onclick="go('s-sci-hub','b')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button><div><div class="ttl">Concept Video</div><div class="sub">Science · Step 1 of 4</div></div></div>
-<div class="frame-wrap reveal"><div class="frame video-frame"><iframe src="https://www.youtube.com/embed/MtBtORkcG4s?rel=0&modestbranding=1" title="Science concept video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+<div class="frame-wrap reveal"><div class="frame video-frame"><iframe class="yt-embed" src="https://www.youtube.com/embed/MtBtORkcG4s?rel=0&modestbranding=1" title="Science concept video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 <div class="res-meta"><h1 data-en="Respiration" data-od="ଶ୍ୱସନ">Respiration</h1><div class="vrow"><span class="chiplet">Odia narration</span><span class="chiplet">SIOS Original</span></div><a class="openlink" href="https://www.youtube.com/watch?v=Yek5mP7wqMc" target="_blank" rel="noopener">Open on YouTube ↗</a></div></div>
 <button class="cta terra reveal" onclick="go('s-sci-practice')">Watched it → Practice now</button>
 </section>
@@ -357,7 +429,7 @@ svg{display:block}
 <div class="tab" onclick="go('s-home')"><div class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><span>Profile</span></div>
 </div>
 </div></div>
-<div class="footer-note">Both courses live · Mathematics → Quadratic Equations · Science → Metals & Non-metals · Upload to your AWS server for full inline embeds including YouTube.</div>
+<div class="footer-note">All courses live · Mathematics → Quadratic Equations · Science → Respiration · History → Gandhi in South Africa · Upload to your AWS server for full inline embeds including YouTube.</div>
 </div>
 
 <script>
@@ -369,7 +441,7 @@ function go(id,dir){
   next.scrollTop=0;next.classList.add('active');
   loadFrames(id);
   document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
-  var m={'s-home':0,'s-math-chapters':1,'s-math-hub':1,'s-math-video':1,'s-math-practice':1,'s-math-pyq':1,'s-math-test':1,'s-sci-chapters':2,'s-sci-hub':2,'s-sci-video':2,'s-sci-practice':2,'s-sci-pyq':2,'s-sci-test':2,'s-result':0};
+  var m={'s-home':0,'s-math-chapters':1,'s-math-hub':1,'s-math-video':1,'s-math-practice':1,'s-math-pyq':1,'s-math-test':1,'s-sci-chapters':2,'s-sci-hub':2,'s-sci-video':2,'s-sci-practice':2,'s-sci-pyq':2,'s-sci-test':2,'s-hist-chapters':2,'s-hist-hub':2,'s-hist-video':2,'s-hist-practice':2,'s-hist-pyq':2,'s-hist-test':2,'s-result':0};
   var tabs=document.querySelectorAll('.tab');if(m[id]!=null)tabs[m[id]].classList.add('on');
 }
 function setLang(l,btn){
@@ -379,6 +451,12 @@ function setLang(l,btn){
 }
 function tick(){var d=new Date(),h=d.getHours(),m=d.getMinutes();document.getElementById('clock').textContent=(h%12||12)+':'+String(m).padStart(2,'0');}
 tick();setInterval(tick,30000);
+document.querySelectorAll('.yt-embed').forEach(function(frame){
+  if(!/^https?:$/.test(window.location.protocol))return;
+  var url=new URL(frame.src);
+  url.searchParams.set('origin', window.location.origin);
+  frame.src=url.toString();
+});
 // Apply Odia as default on load
 document.querySelectorAll('[data-en]').forEach(function(el){if(el.getAttribute('data-od'))el.innerHTML=el.getAttribute('data-od');});
 </script>
